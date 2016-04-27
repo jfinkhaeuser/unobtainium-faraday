@@ -50,7 +50,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "faraday_middleware"
   spec.add_development_dependency "faraday_json"
 
-  spec.add_dependency "unobtainium", "~> 0.3", ">= 0.3.1"
+  spec.add_dependency "unobtainium", "~> 0.3", ">= 0.3.3"
 end
 # rubocop:enable Style/SpaceAroundOperators
 # rubocop:enable Style/UnneededPercentQ, Style/ExtraSpacing

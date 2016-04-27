@@ -78,4 +78,48 @@ describe 'Unobtainium::Faraday::Driver' do
     expect(res.status).to eql 200
     expect(res.body['foo']).to eql 42
   end
+
+  describe 'SSL/TLS' do
+    it 'fails on bad configuration values (bad string)' do
+      opts = {
+        ssl: {
+          client_cert: 'foo',
+        }
+      }
+
+      expect do
+        ::Unobtainium::Driver.create(:api, opts)
+      end.to raise_error(ArgumentError)
+    end
+
+    it 'fails on bad configuration values (bad type)' do
+      opts = {
+        ssl: {
+          client_cert: 42,
+        }
+      }
+
+      drv = ::Unobtainium::Driver.create(:api, opts)
+      expect do
+        drv.get 'https://apps.testinsane.com/rte/status/200'
+      end.to raise_error(TypeError)
+    end
+
+    it "can parse & use file SSL cert information from a file" do
+      # Also tests strings and pre-created objects due to the implementation of
+      # the driver.
+      opts = {
+        ssl: {
+          client_cert: 'spec/data/test.crt',
+          client_key: 'spec/data/test.key',
+        }
+      }
+      drv = ::Unobtainium::Driver.create(:api, opts)
+
+      # We expect the connection to fail due to the bad client certificate
+      expect do
+        drv.get 'https://apps.testinsane.com/rte/status/200'
+      end.to raise_error(::Faraday::ConnectionFailed)
+    end
+  end
 end

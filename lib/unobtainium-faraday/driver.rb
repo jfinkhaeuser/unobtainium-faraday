@@ -69,7 +69,15 @@ module Unobtainium
           end
           opts = DEFAULT_OPTIONS.recursive_merge(opts)
 
-          # TODO: add SSL configuration stuff
+          # For SSL options, if 'client_key' and 'client_cert' are
+          # 1) Strings that name files, then the file contents are substituted, and
+          # 2) Strings that are certificates/private keys, then they are parsed
+          resolve_ssl_option(opts, 'ssl.client_cert',
+                             /BEGIN CERTIFICATE/,
+                             ::OpenSSL::X509::Certificate)
+          resolve_ssl_option(opts, 'ssl.client_key',
+                             /BEGIN (EC|DSA|RSA| *) ?PRIVATE KEY/,
+                             ::OpenSSL::PKey, 1)
 
           return normalize_label(label), opts
         end
@@ -79,6 +87,53 @@ module Unobtainium
         def create(_, options)
           driver = ::Unobtainium::Faraday::Driver.new(options)
           return driver
+        end
+
+        ##
+        # Helper function for resolve_options for resolving SSL options
+        def resolve_ssl_option(opts, path, pattern, klass, match_index = 0)
+          # Ignore if the path doesn't exist
+          if opts.nil? or opts[path].nil?
+            return
+          end
+
+          # Skip if the path isn't a String. We assume it's already been
+          # processed. Either way, faraday can take care of it.
+          val = opts[path]
+          if not val.is_a? String
+            return
+          end
+
+          # If the string represents a file name, read the file! Any errors with
+          # that should go through to the caller.
+          if File.file?(val)
+            val = File.read(val)
+          end
+
+          # If the value doesn't match the given pattern, that seems like an
+          # error.
+          match = val.match(pattern)
+          if not match
+            raise ArgumentError, "Option '#{path}' does not appear to be valid, "\
+                  "as it does not match #{pattern}."
+          end
+
+          # Finally, we can pass the value on to OpenSSL/the klass. Make that
+          # dependent on what class klass actually is.
+          case klass
+          when Class
+            val = klass.new(val)
+          when Module
+            name = match[match_index]
+            if name.nil? or name.empty?
+              name = 'RSA'
+            end
+            name = '::' + klass.name + '::' + name
+            val = Object.const_get(name).new(val)
+          end
+
+          # Overwrite the options!
+          opts[path] = val
         end
       end # class << self
 

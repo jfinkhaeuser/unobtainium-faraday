@@ -16,7 +16,10 @@ GEM
       multipart-post (>= 1.2, < 3)
     faraday_json (0.1.2)
       faraday (>= 0.7.4, < 0.10)
+    faraday_middleware (0.10.0)
+      faraday (>= 0.7.4, < 0.10)
     json (1.8.3)
+    multi_xml (0.5.5)
     multipart-post (2.0.0)
     parser (2.3.1.0)
       ast (~> 2.2)
@@ -62,6 +65,8 @@ DEPENDENCIES
   codeclimate-test-reporter
   faraday
   faraday_json
+  faraday_middleware
+  multi_xml
   rake (~> 11.1)
   rspec (~> 3.4)
   rubocop (~> 0.39)

@@ -46,6 +46,8 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "simplecov", "~> 0.11"
   spec.add_development_dependency "yard", "~> 0.8"
   spec.add_development_dependency "faraday"
+  spec.add_development_dependency "multi_xml"
+  spec.add_development_dependency "faraday_middleware"
   spec.add_development_dependency "faraday_json"
 
   spec.add_dependency "unobtainium", "~> 0.3"

@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     unobtainium-faraday (0.1.0)
-      unobtainium (~> 0.3, >= 0.3.3)
+      unobtainium (~> 0.3, >= 0.3.4)
 
 GEM
   remote: https://rubygems.org/
@@ -53,7 +53,7 @@ GEM
     simplecov-html (0.10.0)
     sys-proctable (1.0.0)
     unicode-display_width (1.0.3)
-    unobtainium (0.3.3)
+    unobtainium (0.3.4)
       sys-proctable (~> 1.0)
     yard (0.8.7.6)
 

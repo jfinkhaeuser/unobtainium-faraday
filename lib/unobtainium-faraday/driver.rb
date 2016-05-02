@@ -139,8 +139,8 @@ module Unobtainium
 
       ##
       # Map any missing method to nokogiri
-      def respond_to?(meth)
-        if not @conn.nil? and @conn.respond_to?(meth)
+      def respond_to_missing?(meth, include_private = false)
+        if not @conn.nil? and @conn.respond_to?(meth, include_private)
           return true
         end
         return super

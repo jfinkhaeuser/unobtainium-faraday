@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    unobtainium-faraday (0.1.0)
+    unobtainium-faraday (0.1.1)
       unobtainium (~> 0.3, >= 0.3.5)
 
 GEM

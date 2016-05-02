@@ -52,7 +52,7 @@ GEM
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.0)
     sys-proctable (1.0.0)
-    unicode-display_width (1.0.3)
+    unicode-display_width (1.0.5)
     unobtainium (0.3.5)
       sys-proctable (~> 1.0)
     yard (0.8.7.6)

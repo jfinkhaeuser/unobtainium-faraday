@@ -201,4 +201,5 @@ end # module Unobtainium
 
 ::Unobtainium::Driver.register_implementation(
     ::Unobtainium::Faraday::Driver,
-    __FILE__)
+    __FILE__
+)

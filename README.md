@@ -5,8 +5,6 @@ based on [faraday](https://github.com/lostisland/faraday).
 
 [![Gem Version](https://badge.fury.io/rb/unobtainium-faraday.svg)](https://badge.fury.io/rb/unobtainium-faraday)
 [![Build status](https://travis-ci.org/jfinkhaeuser/unobtainium-faraday.svg?branch=master)](https://travis-ci.org/jfinkhaeuser/unobtainium-faraday)
-[![Code Climate](https://codeclimate.com/github/jfinkhaeuser/unobtainium-faraday/badges/gpa.svg)](https://codeclimate.com/github/jfinkhaeuser/unobtainium-faraday)
-[![Test Coverage](https://codeclimate.com/github/jfinkhaeuser/unobtainium-faraday/badges/coverage.svg)](https://codeclimate.com/github/jfinkhaeuser/unobtainium-faraday/coverage)
 
 To use it, require it after requiring unobtainium, then create the appropriate driver:
 

@@ -3,13 +3,15 @@
 # unobtainium-faraday
 # https://github.com/jfinkhaeuser/unobtainium-faraday
 #
-# Copyright (c) 2016 Jens Finkhaeuser and other unobtainium-faraday contributors.
+# Copyright (c) 2016-2018 Jens Finkhaeuser and other unobtainium-faraday contributors.
 # All rights reserved.
 #
 
 require 'unobtainium'
 require 'unobtainium/support/util'
-require 'unobtainium/pathed_hash'
+require 'collapsium'
+
+require 'openssl'
 
 module Unobtainium
   ##
@@ -26,7 +28,7 @@ module Unobtainium
 
       # @private
       # Default options to pass to Faraday
-      DEFAULT_OPTIONS = PathedHash.new(
+      DEFAULT_OPTIONS = ::Collapsium::UberHash.new(
         connection: {
           request: [:multipart, :json],
           response: [
